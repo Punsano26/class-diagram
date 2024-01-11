@@ -17,21 +17,24 @@ class Order {
     this.status = status;
   }
   calcSubTotal() {
-  return this.OrderDetails.reduce((total, orderDetail) => total + orderDetail.subTotal(),0)
+    return this.OrderDetails.reduce(
+      (total, orderDetail) => total + orderDetail.subTotal(),
+      0
+    );
   }
   calcTax() {
-    let tax =0;
+    let tax = 0;
     for (let i = 0; i < this.OrderDetails.length; i++) {
       tax += this.OrderDetails[i].calcTax();
     }
     return tax;
   }
   calcTotal() {
-    return this.calcSubTotal()+ this.calcTax();
+    return this.calcSubTotal() + this.calcTax();
   }
   calcToTalWeight() {
-    let weight =0;
-    for (let i =0; i < this.OrderDetails.length; i++) {
+    let weight = 0;
+    for (let i = 0; i < this.OrderDetails.length; i++) {
       weight += this.OrderDetails[i].calcToTalWeight();
     }
     return weight;
@@ -71,17 +74,16 @@ class Item {
     this.description = description;
     this.price = price;
   }
-  setInStock(status){
-    this.inStock =status;
+  setInStock(status) {
+    this.inStock = status;
   }
   getPriceForQuantity(quantity) {
-    return this.price * quantity
+    return this.price * quantity;
   }
   getTax(taxStatus) {
-    if(taxStatus === "Tax included") {
+    if (taxStatus === "Tax included") {
       return 0;
-    }
-    else{
+    } else {
       return this.price * 0.07;
     }
   }
@@ -127,8 +129,8 @@ class Credit extends Payment {
 
 const oldmain = () => {
   let customer1 = new Customer("Punsan Somkla", "12 M.5");
-  let customer2 = new Customer("OOO OOO", "LA")
- 
+  let customer2 = new Customer("OOO OOO", "LA");
+
   //Product Item
   const item1 = new Item(0.3, "ออลอินวันบักเก็ต", 299);
   const item2 = new Item(0.1, "ป๊อปบอมบ์แซ่บ", 299);
@@ -140,11 +142,9 @@ const oldmain = () => {
   //create order
   const order1 = new Order("8/01/2567", "In process");
 
-
   //add order to a customer
   customer1.addOrder(order1);
   customer2.addOrder(order1);
-  
 
   //create order detail
   const orderdetail1 = new OrderDetail(5, "tax in cluded");
@@ -157,29 +157,28 @@ const oldmain = () => {
   order1.addOrderDetail(orderdetail2);
 
   //###################################################################################
-    //create order
-    
-    const order2 = new Order("9/01/2567", "In process")
-  
-    //add order to a customer
-    
-    customer1.addOrder(order2);
-   
-  
-    //create order detail
-    const orderdetail3 = new OrderDetail(5, "tax in cluded");
-    orderdetail3.addItem(item1);
-    const orderdetail4 = new OrderDetail(2, "tax in cluded");
-    orderdetail4.addItem(item4);
-    const orderdetail5 = new OrderDetail(2, "tax in cluded");
-    orderdetail5.addItem(item5);
-  
-    //add order detail to an order
-    order2.addOrderDetail(orderdetail3);
-    order2.addOrderDetail(orderdetail4);
-    order2.addOrderDetail(orderdetail5);
+  //create order
 
- //###################################################################################
+  const order2 = new Order("9/01/2567", "In process");
+
+  //add order to a customer
+
+  customer1.addOrder(order2);
+
+  //create order detail
+  const orderdetail3 = new OrderDetail(5, "tax in cluded");
+  orderdetail3.addItem(item1);
+  const orderdetail4 = new OrderDetail(2, "tax in cluded");
+  orderdetail4.addItem(item4);
+  const orderdetail5 = new OrderDetail(2, "tax in cluded");
+  orderdetail5.addItem(item5);
+
+  //add order detail to an order
+  order2.addOrderDetail(orderdetail3);
+  order2.addOrderDetail(orderdetail4);
+  order2.addOrderDetail(orderdetail5);
+
+  //###################################################################################
   console.log("ชื่อ: " + customer2.name);
   console.log("จำนวนคำสั่งซื้อ : " + customer2.orders.length);
   for (let i = 0; i < customer2.orders.length; i++) {
@@ -195,16 +194,19 @@ const oldmain = () => {
           (k + 1) +
           " " +
           item.description +
-          "จำนวน" +
+          " จำนวน " +
           quantity +
-          "รายการ" +
-          "ราคา" +
+          " รายการ " +
+          " ราคา " +
           subTotal +
-          "บาท"
+          " บาท "
       );
     }
-    console.log("รวมทั้งหมด" + total + "บาท");
+    console.log("รวมทั้งหมด " + total + " บาท");
   }
+  console.log(
+    "--------------------------------------------------------------------"
+  );
 
   console.log("ชื่อ: " + customer1.name);
   console.log("จำนวนคำสั่งซื้อ : " + customer1.orders.length);
@@ -221,16 +223,16 @@ const oldmain = () => {
           (k + 1) +
           " " +
           item.description +
-          "จำนวน" +
+          " จำนวน " +
           quantity +
-          "รายการ" +
-          "ราคา" +
+          " รายการ " +
+          " ราคา " +
           subTotal +
-          "บาท"
+          " บาท "
       );
     }
-    console.log("รวมทั้งหมด" + total + "บาท");
+    console.log(" รวมทั้งหมด " + total + " บาท");
   }
 };
 
-main();
+oldmain();
