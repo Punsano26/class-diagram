@@ -18,7 +18,7 @@ class Order {
   }
   calcSubTotal() {
     return this.OrderDetails.reduce(
-      (total, orderDetail) => total + orderDetail.subTotal(),
+      (total, orderDetail) => total + orderDetail.calcSubTotal(),
       0
     );
   }
@@ -81,7 +81,7 @@ class Item {
     return this.price * quantity;
   }
   getTax(taxStatus) {
-    if (taxStatus === "Tax included") {
+    if (taxStatus === "tax in cluded") {
       return 0;
     } else {
       return this.price * 0.07;
@@ -291,7 +291,6 @@ class Credit extends Payment {
 
       console.log("ชื่อ: " + customer2.name);
       console.log("จำนวนคำสั่งซื้อ : " + customer1.orders.length);
-      console.log(customer2.orders[0].OrderDetails[0].item.description);
       for (let i = 0; i < customer2.orders.length; i++) {
       console.log("คำสั่งซื้อที่ :" + (i + 1));
        for (let k = 0; k < customer2.orders[i].OrderDetails.length; k++) {
@@ -304,9 +303,10 @@ class Credit extends Payment {
             customer2.orders[i].OrderDetails[k].quantity +
             " รายการ " +
             " ราคา " +
-            customer2.orders[i].OrderDetails[k].calcSubTotal()
+            customer2.orders[i].OrderDetails[k].calcSubTotal() + " บาท"
         );
-       }
+       } 
+       console.log("ราคามรวมทั้งหมด "+customer2.orders[i].calcTotal()+" บาท");
     }
 
   }
