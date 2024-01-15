@@ -39,7 +39,7 @@ class Order {
     }
     return weight;
   }
-  addPatment(payment) {
+  addPayment(payment) {
     this.payment = payment;
   }
   addOrderDetail(orderdetail) {
@@ -139,6 +139,9 @@ class Check extends Payment {
   authorized() {
     console.log("see");
   }
+  printDetail(){
+    console.log("ชำระด้วยบัตรเครดิต จำนวน" + this.amount + " บาท");
+  }
 }
 
 class Credit extends Payment {
@@ -147,6 +150,9 @@ class Credit extends Payment {
     this.number = number;
     this.type = type;
     this.expDate = expDate;
+  }
+  printDetail(){
+    console.log("ชำระด้วยเครดิต จำนวน" + this.amount + " บาท");
   }
   authorized() {
     console.log("200");
